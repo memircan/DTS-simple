@@ -1,0 +1,59 @@
+﻿@model WebApplication1.Models.ViewModels.GelenEvrak
+@{
+    ViewData["Title"] = "Detay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container col-md-6 pt-3 text-center">
+    <h2 class="pb-2">Evrak Detayları</h2>
+    <div class="card" style="background-color:grey">
+        <div class="container col-md-12">
+            <div class="card-group">
+                <dl class="row pt-3 ">
+                    <dt class="col-sm-6">Tarih:</dt>
+                    <dd class="col-sm-6">@Model.GelenTarih.ToShortDateString()</dd>
+            
+                    <dt class="col-sm-6">Birim:</dt>
+                    <dd class="col-sm-6">@Model.Birim.BirimAdi</dd>
+
+                    <dt class="col-sm-6">Belge Tipi:</dt>
+                    <dd class="col-sm-6">@Model.GelenCins</dd>
+
+                    <dt class="col-sm-6">Kaydı Oluşturan Personel:</dt>
+                    <dd class="col-sm-6">@Model.User.UserName</dd>
+       
+                    <dt class="col-sm-6">Gönderen(Kurum,Şahıs..):</dt>
+                    <dd class="col-sm-6">@Model.GelenGonderen</dd>
+
+                    <dt class="col-sm-6">Dosya Eki - Dökümanlar:</dt>
+                    <dd class="col-sm-6">
+                        @if (Model.URL == null)
+                            {
+                                <p>Yok</p>
+                            }
+                            else
+                            {
+                                <a class="btn btn-sm btn-warning"  download="@Model.URL" href="~/ekler/@Model.URL">İndir</a>                   
+                            }
+                    </dd>
+       
+                    <dt class="col-sm-6">Açıklama:</dt>
+                    <dd class="col-sm-6">@Model.GelenKonu</dd>
+                 
+                </dl>
+            </div>
+            <div class="mb-2" >
+                @if(User.IsInRole("Mod") || User.IsInRole("Admin"))
+                {
+                 <a class="btn btn-success" href="/GelenEvrak/Guncelle/@Model.GelenId">Güncelle</a>
+                 <a class="btn btn-danger" href="/GelenEvrak/Sil/@Model.GelenId" onclick="return confirm('EVRAK SİLİNECEK ! Emin misin?')">Sil!</a>    
+                 }
+                <a class="btn btn-primary" href="/GelenEvrak/Index" >Kapat</a> 
+            </div>    
+         </div>   
+    </div>
+</div>
+
+

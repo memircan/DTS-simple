@@ -1,0 +1,60 @@
+﻿@model WebApplication1.Models.ViewModels.Contact
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div style="color:red; text-align:center;">@TempData["Message"]</div>
+    <div class="container col-md-4 mt-5 py-2 card" style="text-align:center;background-color:grey" >
+        <h1>İletişim Formu</h1>
+        @using (Html.BeginForm())
+        {        
+        <div class="form-horizontal">
+
+            <div class="form-label-group">
+                <b>Konu Başlığı</b>
+                @Html.TextBoxFor(x => x.Baslik, new { @placeholder = "Konu başlığı", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Baslik, "", new { @style = "color:red" })
+            </div>
+
+            
+            <div class="form-label-group">
+                <b>E-posta</b>
+                @Html.TextBoxFor(x => x.Eposta, new { @placeholder = "E-posta..", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Eposta, "", new { @style = "color:red" })
+            </div>
+
+            <div class="form-label-group">
+                <b>Kullanıcı Adı</b>
+                @Html.TextBox("Kadi", User.Identity.Name, new { @readonly = true, @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Kadi, "", new { @style = "color:red" })
+            </div>
+         
+            <div class="form-label-group">
+                <b>Açıklama</b>
+                @Html.TextAreaFor(x => x.Desc, new { @class = "form-control",@style="resize:none" ,@rows="3",@maxlength="255" , @placeholder = "Açıklama.." })
+                @Html.ValidationMessageFor(model => model.Desc, "", new { @style = "color:red" })
+            </div>
+        </div>
+
+        <div>
+            <button class="btn btn-info mt-2">Gönder</button>
+            <a href="/Home/Index" class="btn btn-light mt-2">İptal</a>
+        </div>
+            
+           
+            
+        }
+    </div>
+
+
+
+    
+ 
+
+    
+
+
+
+

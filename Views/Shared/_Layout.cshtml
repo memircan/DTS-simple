@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="tr" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-language" content="tr">
+    <meta name="keywords" content="gelen evrak,giden evrak,gelen giden evrak takip,evrak takip sistemi">
+    <title>Evrak Takip Sistemi</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/css/cover.css" rel="stylesheet" />
+    <style>
+        .dropdown-content {
+          display: none;
+          margin-top:2px;
+          padding:8px 0px 8px;
+          position: absolute;
+          background-color: #f1f1f1;
+          min-width: 5rem;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+          border:1px solid;
+          border-radius:0.25rem;                 
+        }
+
+        .dropdown-content a {
+          color: black;
+          padding:4px 20px;
+          text-decoration: none;
+          display: block !important;          
+        }
+        .dropdown-content a:hover {background-color: #ddd;}
+        .dropdown:hover .dropdown-content {display: block;}
+    </style>
+</head>
+<body class="d-flex h-100 text-white bg-dark">                
+    <div class="container w-100 d-flex h-100 py-2 mx-auto flex-column ">          
+        <header class="text-center">           
+            <div>
+                <h1 class="float-md-start ">Evrak Takip Sistemi</h1>
+                <nav class="nav nav-masthead justify-content-center ">
+                    <a class="nav-link alert-light" href="/Home/Index">Anasayfa</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {                
+                        <div class="dropdown px-2">
+                              <a class="dropbtn nav-link alert-light dropdown-toggle" > @User.Identity.Name</a>
+                              <div class="dropdown-content">
+                                    <a href="/User/Profile/@User.Identity.Name">Profil</a>
+                                    <a href="/User/Logout">Çıkış</a>                            
+                              </div>
+                        </div>
+                        <a class="nav-link alert-light" href="/Home/Contact">İletişim</a>
+                    }
+                    else
+                    {
+                        <a class="nav-link alert-light" href="/User/Login/">Giriş</a>
+                        <a class="nav-link alert-light" href="/User/SignIn/">Kayıt Ol</a>
+                    }
+                </nav>                
+            </div>
+        </header>
+        @RenderBody()        
+        <footer class="mt-auto text-white-50 text-center">
+            <p>Created by <a href="https://www.linkedin.com/in/emircan-tamer-ba5804211/" class="text-white" target="_blank">MET</a> Company®</p>
+        </footer>
+    </div>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
+
+
+
+

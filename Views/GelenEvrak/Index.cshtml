@@ -1,0 +1,108 @@
+﻿@using WebApplication1.Models.ViewModels;
+@model List<GelenEvrak>
+@using System.Net;
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1>Gelen Evraklar</h1>
+<div class="card py-3" style="background-color:grey">
+    <div class="search">
+        <div class="content" id="content1">
+
+            <!--GELEN EVRAK TABLO FİLTRELEME (ARAMA)-->
+
+            <div class="form-row justify-content-around">
+                <div class="search">
+                    @using (Html.BeginForm())
+                    {
+                        <div>
+                            @Html.TextBox("birimAra", null, new { @class = "form-control", @placeholder = "Birim Adı ile Ara" })
+                        </div>
+                    }
+                </div>
+                <div class="search">
+                    @using (Html.BeginForm())
+                    {
+                        <div>
+                            @Html.TextBox("personelAra", null, new { @class = "form-control", @placeholder = "Personel Adı ile Ara" })
+                        </div>
+                    }
+                </div>
+                <div class="search">
+                    @using (Html.BeginForm())
+                    {
+                        <div>
+                            @Html.TextBox("gonderenAra", null, new { @class = "form-control", @placeholder = "Gönderen ile Ara" })
+                        </div>
+                    }
+                </div>
+                <div class="search">
+                    @using (Html.BeginForm())
+                    {
+                        <div>
+                            @Html.TextBox("tarihAra", null, new { @class = "form-control", @placeholder = "Tarih ile Ara" })
+                        </div>
+                    }
+                </div>
+                <div>
+                    <button class="clean-filter btn btn-outline-light" onclick="document.location='/GelenEvrak/Index'">Filtreyi Temizle</button>
+                </div>
+            </div>
+       
+        </div>
+    </div>
+</div>
+<div class="py-3">
+    <a href="/GelenEvrak/YeniGelenE/" class="btn btn-primary">Gelen Evrak Girişi</a>
+    <a href="/GelenEvrak/ExcelAktar/" class="btn btn-success">Listeyi İndir</a>
+</div>
+<div style="overflow-x:auto;">
+    <table class="table table-striped text-white ">
+        <tr style="background-color:grey">
+            <th>Evrak NO</th>
+            <th>Tarih</th>
+            <th>Oluşturan</th>
+            <th>Birim</th>
+            <th>Gönderen</th>
+            <th>Belge Tipi</th>
+            <th>Dosya Eki</th>
+            <th>Açıklama</th>
+            <th></th>
+            
+        </tr>    
+        @foreach (var x in Model)
+        { 
+            <tr>
+                <td>@x.GelenId</td>
+                <td>@x.GelenTarih.ToShortDateString()</td>
+                <td>@x.User.UserName</td>
+                <td>@x.Birim.BirimAdi</td>
+                <td>@x.GelenGonderen</td>            
+                <td>@x.GelenCins</td>           
+                <td>
+                    @if (x.URL == null)
+                    {
+                        <p>Yok</p>
+                    }
+                    else
+                    {
+                        <a class="btn btn-sm btn-warning"  download="@x.URL" href="~/ekler/@x.URL">İndir</a>
+                    
+                    }
+                        </td>
+                <td style="max-width:10%">@if(x.GelenKonu.Length > 25) 
+                    {
+                        string desc=x.GelenKonu.Substring(0, 25);
+                        desc = desc +"...";
+                        x.GelenKonu = desc;
+                    }
+                    @x.GelenKonu
+                    </td>
+                <td style="text-align:center"><a href="/GelenEvrak/Detay/@x.GelenId" class="btn btn-sm btn-success">Detay</a></td>             
+            </tr>
+
+        }
+    </table>
+</div>

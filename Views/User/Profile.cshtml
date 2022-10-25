@@ -1,0 +1,43 @@
+﻿@model WebApplication1.Models.ViewModels.AppUserViewModel
+
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div style="color:red; text-align:center;">@TempData["ErrMsg"]</div>
+<div class="container col-md-6 text-center">
+    <h3 class="pb-2">Kullanıcı Bilgileri</h3>
+    <div class="card" style="background-color:grey">
+        <div class="container col-md-12">
+            <div class="card-group">
+                <dl class="row pt-3">
+                    <dt class="col-sm-6">Kullanıcı Adı</dt>
+                    <dd class="col-sm-6">@Model.UserName</dd>
+            
+                    <dt class="col-sm-6">Ad Soyad</dt>
+                    <dd class="col-sm-6">@Model.NameSurname</dd>
+       
+                    <dt class="col-sm-6">E-Posta</dt>
+                    <dd class="col-sm-6">@Model.Email</dd>
+       
+                    <dt class="col-sm-6">Telefon</dt>
+                    <dd class="col-sm-6">@Model.PhoneNumber</dd>
+
+                    <dt class="col-sm-6">Parola</dt>
+                    <dd class="col-sm-6"><a href="/User/EditPassword" class="text-white bg-success px-2" style="border-radius:0.75rem;text-decoration:none;"><b></b>Parola Güncelle</a></dd>
+
+                    
+                </dl>
+            </div>
+            <div class="mb-2" >
+                 <a class="btn btn-success" href="/User/EditUser/@Model.Id">Güncelle</a>
+                 <a class="btn btn-danger" href="/User/DeleteProfile/@Model.Id" onclick="return confirm('HESABINI SİLMEK ÜZERESİN ! Emin misin?')">Hesabı Sil!</a>
+                 <a class="btn btn-primary" href="#" onclick="history.back();">Kapat</a> 
+            </div>    
+         </div>   
+    </div>
+</div>

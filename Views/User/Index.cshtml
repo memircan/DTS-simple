@@ -1,0 +1,79 @@
+﻿@model IEnumerable<WebApplication1.Models.Authentication.AppUser>
+
+
+
+<h1>Kullanıcılar</h1>
+<div class="card py-3" style="background-color:grey">
+    <div class="search">
+        <div class="content" id="content1">
+
+            <!--KULLANICI TABLO FİLTRELEME (ARAMA)-->
+
+            <div class="form-row justify-content-around">
+                <div class="search">
+                    @using (Html.BeginForm())
+                    {
+                        <div>
+                            @Html.TextBox("kullaniciAdi", null, new { @class = "form-control", @placeholder = "Kullanıcı Adı ile Ara" })
+                        </div>
+                    }
+                </div>
+                <div class="search">
+                    @using (Html.BeginForm())
+                    {
+                        <div>
+                            @Html.TextBox("adSoyad", null, new { @class = "form-control", @placeholder = "Ad Soyad ile Ara" })
+                        </div>
+                    }
+                </div>
+                <div class="search">
+                    @using (Html.BeginForm())
+                    {
+                        <div>
+                            @Html.TextBox("eposta", null, new { @class = "form-control", @placeholder = "E-Posta ile Ara" })
+                        </div>
+                    }
+                </div>
+    
+                <div>
+                    <button class="clean-filter btn btn-outline-light" onclick="document.location='/User/Index'">Filtreyi Temizle</button>
+                    <a href="/User/ExcelAktar/" class="btn btn-success">Listeyi İndir</a>
+                </div>
+            </div>
+       
+        </div>
+    </div>
+</div>
+
+
+<div style="color:red; text-align:center;">@TempData["ErrorMsg"]</div>
+
+<div style="overflow-x:auto;">
+    <table class="table table-striped  text-white mt-2 ">
+        <tr style="background-color:grey">
+            <th>Kullanıcı ID</th> 
+            <th>Kullanıcı Adı</th>
+            <th>Ad Soyad</th>
+            <th>E-Posta</th>       
+            <th>Telefon Numarası</th>
+            
+            <th></th>  
+        </tr>
+
+        @foreach (var x in Model)
+        {     
+            <tr>
+                <td>@x.Id</td>
+                <td>@x.UserName</td>
+                <td>@x.NameSurname</td>
+                <td>@x.Email</td>
+                <td>@x.PhoneNumber</td>
+                <td style="text-align:center">
+                    <a href="/User/EditUser/@x.Id" class="btn btn-primary">Düzenle</a> 
+                    <a href="/Role/RoleAssign/@x.Id" class="btn btn-success">Yetkilendir</a> 
+                    <a href="/User/DeleteUser/@x.Id" class="btn btn-danger" onclick="return confirm('Kullanıcıyı silmek istediğinizden emin misiniz?')">Sil</a>        
+                </td>         
+            </tr>
+        }
+    </table>
+</div>

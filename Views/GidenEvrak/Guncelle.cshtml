@@ -1,0 +1,50 @@
+﻿@model WebApplication1.Models.ViewModels.GidenEvrak
+@{
+    ViewData["Title"] = "Guncelle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Güncelleme</h1>
+
+@using (Html.BeginForm("Guncelle2", "GidenEvrak", FormMethod.Post))
+{
+    <div class="row">   
+
+        <div style="display:none">          
+            @Html.TextBoxFor(x => x.GidenId, new {@readonly = true, @class = "form-control" })
+            @Html.TextBoxFor(x => x.UserId, new {@readonly = true, @class = "form-control" })
+        </div>
+
+        <div class="col-sm-4 py-2">
+            <b>Tarih</b>
+            @Html.TextBoxFor(x => x.GidenTarih, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.GidenTarih, "", new { @style = "color:red" })
+        </div>   
+        <div class="col-sm-4 py-2">
+            <b>Birim</b>
+             @Html.DropDownListFor(x => x.BirimId, (List<SelectListItem>)ViewBag.brm, "Lütfen Birim Seçin", new { @class = "form-control" })
+        </div>
+
+         <div class="col-sm-4 py-2">
+            <b>Gönderildiği Yer</b>
+            @Html.TextBoxFor(x => x.GidenGonderilen, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.GidenGonderilen, "", new { @style = "color:red" })
+        </div>
+
+        <div class="col-sm-4 py-2">
+            <b>Cins</b>
+            @Html.TextBoxFor(x => x.GidenCins , new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.GidenCins, "", new { @style = "color:red" })
+        </div>
+
+        <div class="col-sm-4 py-2">
+            <b>Konu</b>
+            @Html.TextAreaFor(x => x.GidenKonu, new { @class = "form-control",@style="resize:none" ,@rows="3",@maxlength="133" , @placeholder = "Açıklama.." })
+            @Html.ValidationMessageFor(x => x.GidenKonu, "", new { @style = "color:red" })
+        </div>
+        <br />
+    </div>
+    <button class="btn btn-info">Güncelle</button>
+    <a href="/GidenEvrak/Detay/@Model.GidenId" class="btn btn-light">Geri</a>
+}
+

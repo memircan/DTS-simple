@@ -1,0 +1,41 @@
+﻿@model WebApplication1.Models.ViewModels.AppUserViewModel
+@{
+    
+   
+}
+
+<div class="container col-md-4 card mt-3" style="background-color:grey">
+    <div class="modal-body">
+            @using (Html.BeginForm())
+                   {                      
+
+                            <b>Ad Soyad:</b><br />
+                            @Html.ValidationMessageFor(model => model.NameSurname, "", new { @style = "color:red" })
+                            @Html.TextBoxFor(x => x.NameSurname, new { @class = "form-control" })
+
+                            <b>Kullanıcı Adı:</b><br />
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @style = "color:red" })
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+
+                            <b>E-Posta:</b><br />
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @style = "color:red" })
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+
+                            <b>Telefon Numarası:</b><br />
+                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @style = "color:red" })
+                            @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control" })
+
+                           
+                            <div class="pt-2 text-center" >
+                                <button class="btn btn-primary">Güncelle</button>
+                                <a class="btn btn-danger" href="#" onclick="history.back();">İptal</a>
+                                
+                            </div>     
+                        
+                        }
+    </div>                           
+</div>
+  
+
+
+

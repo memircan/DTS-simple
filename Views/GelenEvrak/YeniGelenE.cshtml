@@ -1,0 +1,69 @@
+﻿@model WebApplication1.Models.ViewModels.EvrakEkle
+
+
+@{
+    ViewData["Title"] = "YeniGelenE";
+}
+
+    
+    
+    <form class="form-group" method="post" enctype="multipart/form-data">
+        <h1>Gelen evrak girişi</h1>
+        <br />
+
+        <div class="form-row"> 
+            <div class="col-md-6 pt-2 form-group">
+                <b>Birim</b>
+                @Html.DropDownListFor(model => model.BirimId, (List<SelectListItem>)ViewBag.brm, "Lütfen Birim Seçin", new { @class = "form-control" })
+                 @Html.ValidationMessageFor(model => model.BirimId, "", new { @style = "color:red" })
+            </div>
+            
+            <div class="col-md-6 pt-2 form-group">
+                <b>Gönderen</b>
+                @Html.TextBoxFor(model => model.GelenGonderen, new { @class = "form-control", @placeholder = "Gönderen Kurum,Şahıs.." })           
+                @Html.ValidationMessageFor(model => model.GelenGonderen, "", new { @style = "color:red" })
+            </div>
+
+            <div class=" col-md-6 pt-2 form-group">
+                <b>Belge Tipi</b>
+                @Html.TextBoxFor(model => model.GelenCins, new { @class = "form-control ", @placeholder = "Belge Tipi", })
+                @Html.ValidationMessageFor(model => model.GelenCins, "", new { @style = "color:red" })
+            </div>
+
+            <div class="col-md-6 pt-2 form-group">
+                <b>Tarih</b>
+                @Html.TextBoxFor(model => model.GelenTarih, new { @class = "form-control", @type = "date" })
+                @Html.ValidationMessageFor(model => model.GelenTarih, "", new { @style = "color:red" })
+            </div>
+
+            <div class="col-md-6 pt-2 form-group">
+                <b>Açıklama</b>
+                @Html.TextAreaFor(model => model.GelenKonu, new { @class = "form-control",@style="resize:none" ,@rows="3",@maxlength="133" , @placeholder = "Açıklama.." })           
+                @Html.ValidationMessageFor(model => model.GelenKonu, "", new { @style = "color:red" })
+            </div>
+
+            <div hidden>                
+                @Html.TextBox("UserId", (string)ViewBag.userId, new { @readonly = true, @class = "form-control" })
+            </div>
+
+            <div class="col-md-6 py-5">
+                <b>Dosya Eki</b>
+                <input type="file" name="URL" />
+            </div>
+            
+        </div>
+        <div>
+            <button class="btn btn-info mt-2">Kaydet</button>
+            <a href="/GelenEvrak/Index" class="btn btn-light mt-2">Geri</a>
+        </div>
+            
+    </form>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+

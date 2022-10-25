@@ -1,0 +1,70 @@
+﻿@model WebApplication1.Models.ViewModels.EvrakEkle2
+
+
+@{
+    ViewData["Title"] = "YeniGidenE";
+}
+
+    
+    
+    <form class="form-group" method="post" enctype="multipart/form-data">
+        <h1>Giden evrak girişi</h1>
+        <br />
+
+        <div class="form-row">
+            <div class="col-md-6 pt-2">
+                <b>Birim</b>
+                @Html.DropDownListFor(x => x.BirimId, (List<SelectListItem>)ViewBag.brm, "Lütfen Birim Seçin", new { @class = "form-control" })
+            </div>
+
+            <div class="col-md-6 pt-2">
+                <b>Gönderildiği Yer</b>
+                @Html.TextBoxFor(x => x.GidenGonderilen, new { @class = "form-control", @placeholder = "Gönderildiği Kurum,Şahıs.." })
+                @Html.ValidationMessageFor(model => model.GidenGonderilen, "", new { @style = "color:red" })
+
+            </div>
+
+            <div class=" col-md-6 pt-2">
+                <b>Belge Tipi</b>
+                @Html.TextBoxFor(x => x.GidenCins, new { @class = "form-control ", @placeholder = "Belge Tipi", })
+                @Html.ValidationMessageFor(model => model.GidenCins, "", new { @style = "color:red" })
+            </div>
+
+            <div class="col-md-6 pt-2">
+                <b>Tarih</b>
+                @Html.TextBoxFor(x => x.GidenTarih, new { @class = "form-control", @type = "date" })
+                @Html.ValidationMessageFor(model => model.GidenTarih, "", new { @style = "color:red" })
+                
+            </div>
+
+            <div class="col-md-6 pt-2">
+                <b>Açıklama</b>
+                @Html.TextAreaFor(x => x.GidenKonu, new { @class = "form-control",@style="resize:none" ,@rows="3",@maxlength="133" , @placeholder = "Açıklama.." })
+                @Html.ValidationMessageFor(model => model.GidenKonu, "", new { @style = "color:red" })
+            </div>
+
+            <div hidden>                
+                @Html.TextBox("UserId", (string)ViewBag.userId, new { @readonly = true, @class = "form-control" })
+            </div>
+
+            <div class="col-md-6 py-5">
+                <b>Dosya Eki</b>
+                <input type="file" name="URL" />
+            </div>
+
+        </div>
+        <div>
+            <button class="btn btn-info mt-2">Kaydet</button>
+            <a href="/GidenEvrak/Index" class="btn btn-light mt-2">Geri</a>
+        </div>
+            
+    </form>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
